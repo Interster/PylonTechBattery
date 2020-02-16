@@ -41,6 +41,25 @@ Stuur volgende string HEX getalle na die battery:
 
 `7E 32 30 30 31 34 36 34 32 45 30 30 32 30 31 46 44 33 35 0D`
 
+Dit beteken
+`7E` - begin van data
+
+`32 30` - 20 in ASCII dit is die weergawe (VER)
+
+`30 31` - 01 dit is die battery nommer of ADR veld
+
+`34 36` - 32 is 'n 4 in ASCII in heks en 36 is 'n 6 in heks in ASCII, dus 46 en dit is die kode vir litium ioon batterye (CID1)
+
+`34 32` - 42 dit is die kode vir analoog inligting vanaf battery (CID2)
+
+`45 30 30 32` - LENGTH dit is die lengte van die data wat met 'n komplekse berekening bereken word
+
+`30 31` - INFO Dit is die ASCII vir 01 wat beteken jy vra vir battery 1 se inligting
+
+`46 44 33 35` - CHECKSUM  Dit is die toets som vir hierdie string data
+
+`0D` - dit is die einde van die data oftewel "Carriage return"
+
 Kry dan terug:
 
 `7E 32 30 30 31 34 36 30 30 43 30 36 45 31 31 30 31 30
