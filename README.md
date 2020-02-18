@@ -33,7 +33,7 @@ Bronne vanaf Duitse forum
 
 Hier is die ASCII tabel.  Die Pylontech stuur data in Heksadesimale getalle, maar dit gebruik die heksadesimale waarde van die ASCII tabel.
 
-![asciifull](/home/niel/gitclonetemp/PylonTechBattery/asciifull.gif)
+![asciifull](asciifull.gif)
 
 Voorbeeld uit paragraaf 5 van RS-232 handleiding van Pylontech battery:
 
