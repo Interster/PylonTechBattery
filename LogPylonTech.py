@@ -69,7 +69,7 @@ import serial
 
 # Log parameters
 monsterfrekwensie = 30 # [sekondes]
-totalesekondes = 24*60*60 # [sekondes]
+totalesekondes = 60 #24*60*60 # [sekondes]
 
 # Opdrag vanaf paragraaf 5 in seriepoort handleiding:  Lees analoog data
 bytestosend = '7E3230303134363432453030323031464433350D'
@@ -85,6 +85,7 @@ while (datetime.datetime.now() - begintyd).seconds < totalesekondes:
     with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
         x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
         uitstring = ser.read(1000)
+        a = uitstring.hex()
     
     # Log data na leer
     leer.write(str(datetime.datetime.now()) + ',' + skryfLogLynBattery(a))
