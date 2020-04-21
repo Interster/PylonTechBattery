@@ -89,6 +89,26 @@ $SOC = \frac{2.352W}{2400W} = 0.98 = 98\%$
 
 Hierdie berekening neem aan dit is 'n 2.4kWh battery oftewel die Pylontech US2000.
 
+
+
+### Battery instellings vir die Pylontech battery op die Axpert inverter
+
+Die volgende instellings is gedoen vir die Axpert om die Pylontech battery in staat te stel om meer leeg te loop.  Dit stel die battery in staat om meer van die sonkrag te benut.  Dit verskil van die standaard Pylontech instellings vir die Axpert.  Dus moet dit gesien word as meer onveilig (die battery mag leegloop met hierdie instellings wat ongewens is).
+
+Axpert Program nommer:
+
+Program 02 - Stel na N*20A, N = aantal batterye
+
+Program 05 - USE  
+
+Program 12 - 46V  
+
+Program 13 - 48V
+
+Program 29 - 46V
+
+Belangrike nota:  Met 'n stelsel waar daar baie panele is kan program 02 eerder na die volgende gestel word:  N*20A - 10A.  Dit is meer geskik want daar is ondervind dat die DC skakelaar uitklink a.g.v. baie groot stroomwaardes wat die battery nie kan absorbeer op kort kennisgewing nie.  Indien die laaistroom laer gestel word soos laasgenoemde, verdwyn die probleem.
+
 ### Task: Display Detected System’s Serial Support
 
  Simply run dmesg command
