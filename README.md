@@ -99,6 +99,8 @@ As jy vir 'n nommer soos bv. 02 vra, kry jy battery 2 se inligting.
 Doen die LENID en CHKSUM berekening vir bogenoemede twee gevalle
 en skryf die opdrag uit.
 Toets dit dan. 
+Wys hoe die berekening gedoen word.
+
 
 
 ### Battery instellings vir die Pylontech battery op die Axpert inverter
