@@ -90,6 +90,16 @@ $SOC = \frac{2.352W}{2400W} = 0.98 = 98\%$
 Hierdie berekening neem aan dit is 'n 2.4kWh battery oftewel die Pylontech US2000.
 
 
+Doen 'n voorbeeld berekening van die LENID en die Checksum van die opdrag analog.
+
+Dan doen die berekening oor vir die geval van 'n parallelle battery.
+Die parallelle batery inligting word gevra in die INFO veld.
+As jy vir FF in die INFO veld vra, kry jy alle inligting.
+As jy vir 'n nommer soos bv. 02 vra, kry jy battery 2 se inligting.
+Doen die LENID en CHKSUM berekening vir bogenoemede twee gevalle
+en skryf die opdrag uit.
+Toets dit dan. 
+
 
 ### Battery instellings vir die Pylontech battery op die Axpert inverter
 

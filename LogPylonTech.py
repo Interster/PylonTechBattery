@@ -9,11 +9,18 @@ def twos_complement(hexstr,bits):
     # Maar greep n-1 het waarde 2^(n-1) wanneer dit geen teken het nie, dus is die getal 2^n te hoog.
     # Trek dus 2^n af indien greep n-1 'n waarde het
 
-    value = int(hexstr,16)
-    if value & (1 << (bits-1)):
-        value -= 1 << bits
+    try:
+        value = int(hexstr,16)
+            
+        if value & (1 << (bits-1)):
+            value -= 1 << bits
     
-    return value
+        return value
+    except:
+        value = 'fout'
+        print('Leesfout van battery by twoscomplement - probeer weer')
+        
+        return value
 
 def wysHeksString(insetstring):
     print('Heksadesimale ASCII waarde')
@@ -27,18 +34,26 @@ def wysHeksString(insetstring):
     return 0
 
 def uitsetGetalHeksString(insetstring):
-    # Neem die insetstring van die battery ontvang en kry die ASCII waarde daarvan
-    getalinheks = bytearray.fromhex(insetstring).decode()
-    # getalinheks word nou omgeskakel na 'n desimale waarde wat gebruik kan word.
-    uitsetgetal = int(getalinheks, 16)
-    
+    try:
+        # Neem die insetstring van die battery ontvang en kry die ASCII waarde daarvan
+        getalinheks = bytearray.fromhex(insetstring).decode()
+        # getalinheks word nou omgeskakel na 'n desimale waarde wat gebruik kan word.
+        uitsetgetal = int(getalinheks, 16)
+    except:
+        uitsetgetal = 'fout'
+        print('Leesfout van battery by fromhex - probeer weer')
+
     return uitsetgetal
 
 def uitsetGetalHeksStringSignInt(insetstring):
-    # Neem die insetstring van die battery ontvang en kry die ASCII waarde daarvan
-    getalinheks = bytearray.fromhex(insetstring).decode()
-    # getalinheks word nou omgeskakel na 'n desimale waarde wat gebruik kan word.
-    uitsetgetal = twos_complement(getalinheks, 16)
+    try:
+        # Neem die insetstring van die battery ontvang en kry die ASCII waarde daarvan
+        getalinheks = bytearray.fromhex(insetstring).decode()
+        # getalinheks word nou omgeskakel na 'n desimale waarde wat gebruik kan word.
+        uitsetgetal = twos_complement(getalinheks, 16)
+    except:
+        uitsetgetal = 'fout'
+        print('Leesfout van battery by fromhex - probeer weer')
     
     return uitsetgetal
 
@@ -48,6 +63,7 @@ def skryfLogLynBattery(leesvanbattery):
     
     #Stroom in milliAmpere/100.  Dus vermenigvuldig met 100 en deel deur 1000 om Ampere te kry
     stroom = uitsetGetalHeksStringSignInt(a[-78:-70])
+    
     #Spanning in milliVolt van hele battery
     spanning = uitsetGetalHeksString(a[-70:-62])
     #Oorblywende energie in battery
@@ -56,7 +72,7 @@ def skryfLogLynBattery(leesvanbattery):
     energietotaal = uitsetGetalHeksString(a[-50:-42])
     # Siklusse
     siklusse = uitsetGetalHeksString(a[-42:-34])
-        
+    
     uitsetloglyn = str(stroom) + ',' + str(spanning) + ',' + str(energieOor) + ',' + str(energietotaal) + ',' + str(siklusse)
     
     return uitsetloglyn
@@ -69,7 +85,7 @@ import serial
 
 # Log parameters
 monsterfrekwensie = 30 # [sekondes]
-totalesekondes = 2*60 #24*60*60 # [sekondes]
+totalesekondes = 24*60*60 #2*60 #24*60*60 # [sekondes]
 
 # Opdrag vanaf paragraaf 5 in seriepoort handleiding:  Lees analoog data
 bytestosend = '7E3230303134363432453030323031464433350D'
@@ -84,12 +100,22 @@ while (datetime.datetime.now() - begintyd).seconds < totalesekondes:
     # Stuur data 1200 baud.  Dit moet eers teen hierdie spoed gestuur word
     with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
         x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
-        uitstring = ser.read(1000)
-        a = uitstring.hex()
+        try:
+            uitstring = ser.read(1000)
+            a = uitstring.hex()
+        except:
+            a = ''
     
     # Log data na leer
-    leer.write(str(datetime.datetime.now()) + ',' + skryfLogLynBattery(a))
-    leer.write('\n')
+    if a == '':
+        print('Leesfout van battery by hooflus - probeer weer')
+    else:
+        skryfnaleer = str(datetime.datetime.now()) + ',' + skryfLogLynBattery(a)
+        leer.write(skryfnaleer)
+        leer.write('\n')
+        print(skryfnaleer)
+        
     time.sleep(monsterfrekwensie - 5)
 
 leer.close()
+
