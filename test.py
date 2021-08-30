@@ -1,7 +1,9 @@
 from binascii import unhexlify
 import serial
 
-bytestosend = '7E3230303134363432453030323031464433350D'
+#bytestosend = '7E3230303134363432453030323031464433350D'
+bytestosend = '7E3230303134363432453030324646464430410D'
+
 
 with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
     x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
