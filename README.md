@@ -90,7 +90,41 @@ $SOC = \frac{2.352W}{2400W} = 0.98 = 98\%$
 Hierdie berekening neem aan dit is 'n 2.4kWh battery oftewel die Pylontech US2000.
 
 
-Doen 'n voorbeeld berekening van die LENID en die Checksum van die opdrag analog.
+## Voorbeeld berekeninge van die toetssom en lengte
+
+Doen 'n voorbeeld berekening van die LENID en die CHKSU van die analoog opdrag.
+
+### Voorbeeld uit protokol met 1 battery
+
+Die volgende opdrag word na die battery gestuur:
+
+`7E 32 30 30 31 34 36 34 32 45 30 30 32 30 31 46 44 33 35 0D`
+
+Die belangrike items vir hierdie berekening is as volg:
+
+`45 30 30 32` - LENGTH (lengte van die data)
+
+`30 31` - INFO Dit is die ASCII vir 01 wat beteken jy vra vir battery 1 se inligting
+
+`46 44 33 35` - CHECKSUM  Toetssom
+
+Die protokol van die Pylontech battery noem in tabel A7 dat die lengte datagreep in 4 ASCII syfers verdeel word om die data te stuur.  Die lengte van die data word hier gegee as twee of 002 (30H 30H 32H).  Dus is die lengte van die data in die INFO kolom gelyk aan LENID/2 = 2/2 = 1 (sien tabel A1 in protokol).
+Die LCHKSUM kan nou as volg bereken word vir die waarde van 002 (30H 30H 32H).
+Verander eers hierdie getalle in binere waardes:  Dus word 002:  0000 0000 0010 in biner.
+Die hele string is een getal.  Met ander woord die leidende nulle word weggegooi, maar die 3 groepe getalle werk as een.  As nog 'n voorbeeld, indien die getal 18 in desimaal in hierdie geval sal geskryf word as die binere getal:  10010, maar in die bostaande formaat van groepe van 4 karakters word dit geskryf as 0000 0001 0010.  En hierdie drie groepe word voorgestel deur kommunkasie wat heksadesimale getalle aanstuur.
+
+Nou om die LCHKSUM vir die waarde van 002 te bereken neem jy die binere getall vir die 3 groepe wat die getal opmaak en tel hulle bymekaar:
+    0000B + 0000B + 0010B = 0010B (B staan vir biner)
+    
+Neem nou die modulus van 16 (deel dit deur 16 en vat die res) wat 0010B bly.  Dit word dan bis gewys omgeruil wat dit 1101B maak.  Dan tel 1 by om dit 1110B te maak.  Skakel nou 1110B om na heksadesimaal en jy kry E in heksadesimaal (oftewel 14 in desimaal).  Hierdie waarde van E in die ASCII tabel is 45.
+
+Dus word die waarde van LENID of LENGTH nou:
+    
+'45 30 30 32'
+
+
+
+### Voorbeeld met paralelle battery
 
 Dan doen die berekening oor vir die geval van 'n parallelle battery.
 Die parallelle batery inligting word gevra in die INFO veld.
