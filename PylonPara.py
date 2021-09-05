@@ -67,6 +67,8 @@ def uitsetGetalHeksStringSignInt(insetstring):
 def skryfLogLynBattery(leesvanbattery):
     a = leesvanbattery
     
+    #'DatumTyd, Stroom 1 mA_100, Spanning 1 mV, Energie oor 1 mAh, Totale energie 1 mAh, Siklusse 1, Stroom 2 mA_100, Spanning 2 mV, Energie oor 2 mAh, Totale energie 2 mAh, Siklusse 2\n'
+    
     #Stroom in milliAmpere/100.  Dus vermenigvuldig met 100 en deel deur 1000 om Ampere te kry
     stroom = uitsetGetalHeksStringSignInt(a[202:210])
     
