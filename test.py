@@ -1,14 +1,29 @@
-from binascii import unhexlify
+from PylonPara import *
 import serial
 
-#bytestosend = '7E3230303134363432453030323031464433350D'
-bytestosend = '7E3230303134363432453030324646464430410D'
+def stuurPylonSerie(bytestosend):
+    with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
+        x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
+        uitstring = ser.read(1000)
+        
+        leeswaardehex = uitstring.hex()
+    
+    return leeswaardehex
+
+def main():
+    # Standaard voorbeeld:  Vra een battery se data
+    #bytestosend = '7E3230303134363432453030323031464433350D'
+    # Parallel battery:  Vra alle data van alle batterye in batterypak
+    # Voorbeeld van suksesvolle uitsetstring:
+    #a = '7e323030313436303031304630313130323046304445353044453530444344304445353044453230444533304445353044453230444538304445353044444530444537304445373044453730444535303530423942304237333042373330423744304237333030303044303444464646463034464646463030463530313233463430313231313030463044453330444534304445323044453430444430304445333044453430444534304445373044453530444534304445353044453630444536304445363035304239423042374430423744304237443042374430303030443034464646464630344646464630304339303132334634303132313130433731430d'
+    
+    bytestosend = '7E3230303134363432453030324646464430410D'
+    
+    a = stuurPylonSerie(bytestosend)
+    
+    print('Hier is uitset')
+    print(a)
 
 
-with serial.Serial('/dev/ttyUSB0', 1200, timeout=5.0) as ser:
-    x = ser.write(unhexlify(bytestosend)) # Stuur opdrag na die battery
-    uitstring = ser.read(1000)
-    a = uitstring.hex()
-
-print('Hier is uitset')
-print(a)
+if __name__ == "__main__":
+    main()
