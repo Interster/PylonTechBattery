@@ -2,7 +2,7 @@ from PylonPara import *
 
 # Log parameters
 monsterfrekwensie = 30 # [sekondes]
-totalesekondes = 2*60 #24*60*60 #2*60 #24*60*60 # [sekondes]
+totalesekondes = 2*60 #8*60*60  #24*60*60 # [sekondes]
 
 # Opdrag vanaf paragraaf 5 in seriepoort handleiding:  Lees analoog data
 #bytestosend = '7E3230303134363432453030323031464433350D'

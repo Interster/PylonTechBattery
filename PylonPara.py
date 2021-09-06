@@ -75,13 +75,13 @@ def skryfLogLynBattery(leesvanbattery):
     #Spanning in milliVolt van hele battery
     spanning = uitsetGetalHeksString(a[210:218])
     #Oorblywende energie in battery
-    energieOor = uitsetGetalHeksString(a[218:226])
+    energieOor = uitsetGetalHeksString(a[246:258])
     # Totale energie in battery
-    energietotaal = uitsetGetalHeksString(a[230:238])
+    energietotaal = uitsetGetalHeksString(a[258:270])
     # Siklusse
     siklusse = uitsetGetalHeksString(a[238:246])
     
-    uitsetloglyn = str(stroom) + ',' + str(spanning) + ',' + str(energieOor) + ',' + str(energietotaal) + ',' + str(siklusse)
+    uitsetloglyn = str(stroom) + ',' + str(spanning) + ',' + str(energieOor) + ',' + str(energietotaal) + ',' + str(siklusse) + ','
     
     
     #Stroom in milliAmpere/100.  Dus vermenigvuldig met 100 en deel deur 1000 om Ampere te kry
@@ -90,9 +90,9 @@ def skryfLogLynBattery(leesvanbattery):
     #Spanning in milliVolt van hele battery
     spanning2 = uitsetGetalHeksString(a[446:454])
     #Oorblywende energie in battery
-    energieOor2 = uitsetGetalHeksString(a[454:462])
+    energieOor2 = uitsetGetalHeksString(a[482:494])
     # Totale energie in battery
-    energietotaal2 = uitsetGetalHeksString(a[466:474])
+    energietotaal2 = uitsetGetalHeksString(a[494:506])
     # Siklusse
     siklusse2 = uitsetGetalHeksString(a[474:482])
     
